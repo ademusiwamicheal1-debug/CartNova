@@ -1,0 +1,29 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Helper function to check if requester is the authorized master administrator
+    function isMasterAdmin() {
+      return request.auth != null && (
+        request.auth.token.email == 'ademusiwamicheal1@gmail.com' ||
+        (exists(/users/$(request.auth.uid)) && get(/users/$(request.auth.uid)).data.role == 'admin')
+      );
+    }
+
+    // User profile access: Users can read/write their own profile; master admin can manage all
+    match /users/{userId} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null && (request.auth.uid == userId || isMasterAdmin());
+      
+      // User orders subcollection
+      match /orders/{orderId} {
+        allow read, write: if request.auth != null && (request.auth.uid == userId || isMasterAdmin());
+      }
+      
+      // User wishlist subcollection
+      match /wishlist/{itemId} {
+        allow read, write: if request.auth != null && (request.auth.uid == userId || isMasterAdmin());
+      }
+    }
+  }
+}

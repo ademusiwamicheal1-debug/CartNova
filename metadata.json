@@ -1,0 +1,6 @@
+{
+  "name": "Cart NOVA - Modern E-Commerce Marketplace",
+  "description": "Next-generation mega online shopping marketplace with Firebase Authentication, Cloud Firestore profile persistence, 7 Modern UI Themes, flash drops, group buying, verified brand malls, fast express logistics, Nova AI Assistant, powerful Admin Panel with price & picture management, e-commerce product extractor from Amazon/AliExpress/Shopify/eBay/Temu, and integrated Public Shopping APIs explorer.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
